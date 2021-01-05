@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		621271DD24E44BDF0095B4D9 /* ProdFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621271DC24E44BDF0095B4D9 /* ProdFormCell.swift */; };
+		622272B72507FEB000CE5D6A /* OrderFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622272B62507FEB000CE5D6A /* OrderFormCell.swift */; };
+		622272B92508201D00CE5D6A /* UITextField+InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622272B82508201D00CE5D6A /* UITextField+InputView.swift */; };
+		622272BB2512DABC00CE5D6A /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622272BA2512DABC00CE5D6A /* OrderCell.swift */; };
 		622B5CCB24D5E73B00614887 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622B5CCA24D5E73B00614887 /* Constants.swift */; };
-		622B5CCD24D5F62C00614887 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 622B5CCC24D5F62C00614887 /* GoogleService-Info.plist */; };
 		622B5CD124DF137A00614887 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622B5CD024DF137A00614887 /* ProductViewController.swift */; };
 		622B5CD324DF160E00614887 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622B5CD224DF160E00614887 /* ProductCell.swift */; };
 		6237FAE924D1D9EA00442276 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6237FAE824D1D9EA00442276 /* AppDelegate.swift */; };
@@ -21,6 +23,14 @@
 		6237FAF824D1D9F200442276 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6237FAF624D1D9F200442276 /* LaunchScreen.storyboard */; };
 		6237FB0124D1DA3400442276 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6237FB0024D1DA3400442276 /* Product.swift */; };
 		6237FB0424D1DA5600442276 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6237FB0324D1DA5600442276 /* Ingredient.swift */; };
+		624AD0F5252D16F300772A2C /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624AD0F4252D16F300772A2C /* Measurement.swift */; };
+		6258CD40253A8C270068EFCA /* IngType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6258CD3F253A8C270068EFCA /* IngType.swift */; };
+		626E812825420DBE00540CDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 626E812725420DBE00540CDF /* GoogleService-Info.plist */; };
+		626E812A2542117600540CDF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626E81292542117600540CDF /* LoginViewController.swift */; };
+		626E812C2542120400540CDF /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 626E812B2542120400540CDF /* Extension.swift */; };
+		627239F32506E56200C281AD /* ProductGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 627239F22506E56200C281AD /* ProductGrid.swift */; };
+		62AA0135251A862100F35C32 /* FoldingDemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AA0134251A862100F35C32 /* FoldingDemoCell.swift */; };
+		62AA0137251A8E1500F35C32 /* Order2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AA0136251A8E1500F35C32 /* Order2ViewController.swift */; };
 		62B0FD2F24EB224C00A0F70D /* ProdDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B0FD2E24EB224C00A0F70D /* ProdDetailViewController.swift */; };
 		62B0FD3124EB227000A0F70D /* ProdDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B0FD3024EB227000A0F70D /* ProdDetailCell.swift */; };
 		62B30EBA24D243C400C2CD4D /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B30EB924D243C400C2CD4D /* Order.swift */; };
@@ -30,7 +40,12 @@
 		62B30EC324D25CB500C2CD4D /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B30EC224D25CB500C2CD4D /* FormCell.swift */; };
 		62B30EC524D2637E00C2CD4D /* InvFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B30EC424D2637E00C2CD4D /* InvFormViewController.swift */; };
 		62CF190524F9AB46002718AA /* IngDisp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF190424F9AB46002718AA /* IngDisp.swift */; };
+		62CF190724F9D8AA002718AA /* FormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CF190624F9D8AA002718AA /* FormModel.swift */; };
 		62D96B8924E1FCD1008A9EBF /* ProdFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D96B8824E1FCD1008A9EBF /* ProdFormViewController.swift */; };
+		62DC653825055E740031FA6D /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC653725055E740031FA6D /* OrderViewController.swift */; };
+		62DC653A25055E870031FA6D /* OrderFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC653925055E870031FA6D /* OrderFormViewController.swift */; };
+		62DC653C25055EEB0031FA6D /* OrderProdSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC653B25055EEB0031FA6D /* OrderProdSelectionViewController.swift */; };
+		62DC653E2506DE060031FA6D /* OrderSelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62DC653D2506DE060031FA6D /* OrderSelCell.swift */; };
 		E0DEEE5458E7287AEA959208 /* Pods_BakeryHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EA4DEAC5AF6D89B056DBAA0 /* Pods_BakeryHelper.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +53,10 @@
 		1EA4DEAC5AF6D89B056DBAA0 /* Pods_BakeryHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BakeryHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3D4E23F6005E1F3E704EA8 /* Pods-BakeryHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BakeryHelper.debug.xcconfig"; path = "Target Support Files/Pods-BakeryHelper/Pods-BakeryHelper.debug.xcconfig"; sourceTree = "<group>"; };
 		621271DC24E44BDF0095B4D9 /* ProdFormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProdFormCell.swift; path = BakeryHelper/Assets.xcassets/ProdFormCell.swift; sourceTree = SOURCE_ROOT; };
+		622272B62507FEB000CE5D6A /* OrderFormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderFormCell.swift; sourceTree = "<group>"; };
+		622272B82508201D00CE5D6A /* UITextField+InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+InputView.swift"; sourceTree = "<group>"; };
+		622272BA2512DABC00CE5D6A /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		622B5CCA24D5E73B00614887 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		622B5CCC24D5F62C00614887 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		622B5CD024DF137A00614887 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		622B5CD224DF160E00614887 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		6237FAE524D1D9EA00442276 /* BakeryHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BakeryHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +70,14 @@
 		6237FAF924D1D9F200442276 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6237FB0024D1DA3400442276 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		6237FB0324D1DA5600442276 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		624AD0F4252D16F300772A2C /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
+		6258CD3F253A8C270068EFCA /* IngType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngType.swift; sourceTree = "<group>"; };
+		626E812725420DBE00540CDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		626E81292542117600540CDF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = BakeryHelper/Controller/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
+		626E812B2542120400540CDF /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = View/Extension.swift; sourceTree = "<group>"; };
+		627239F22506E56200C281AD /* ProductGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductGrid.swift; sourceTree = "<group>"; };
+		62AA0134251A862100F35C32 /* FoldingDemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingDemoCell.swift; sourceTree = "<group>"; };
+		62AA0136251A8E1500F35C32 /* Order2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order2ViewController.swift; sourceTree = "<group>"; };
 		62B0FD2E24EB224C00A0F70D /* ProdDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdDetailViewController.swift; sourceTree = "<group>"; };
 		62B0FD3024EB227000A0F70D /* ProdDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdDetailCell.swift; sourceTree = "<group>"; };
 		62B30EB924D243C400C2CD4D /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
@@ -62,7 +87,12 @@
 		62B30EC224D25CB500C2CD4D /* FormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
 		62B30EC424D2637E00C2CD4D /* InvFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InvFormViewController.swift; path = BakeryHelper/Controller/InvFormViewController.swift; sourceTree = SOURCE_ROOT; };
 		62CF190424F9AB46002718AA /* IngDisp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngDisp.swift; sourceTree = "<group>"; };
+		62CF190624F9D8AA002718AA /* FormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormModel.swift; sourceTree = "<group>"; };
 		62D96B8824E1FCD1008A9EBF /* ProdFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdFormViewController.swift; sourceTree = "<group>"; };
+		62DC653725055E740031FA6D /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		62DC653925055E870031FA6D /* OrderFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderFormViewController.swift; sourceTree = "<group>"; };
+		62DC653B25055EEB0031FA6D /* OrderProdSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProdSelectionViewController.swift; sourceTree = "<group>"; };
+		62DC653D2506DE060031FA6D /* OrderSelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderSelCell.swift; path = BakeryHelper/View/OrderSelCell.swift; sourceTree = SOURCE_ROOT; };
 		7A9598C28A45DFA2E5510ACA /* Pods-BakeryHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BakeryHelper.release.xcconfig"; path = "Target Support Files/Pods-BakeryHelper/Pods-BakeryHelper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,16 +129,18 @@
 		6237FAE724D1D9EA00442276 /* BakeryHelper */ = {
 			isa = PBXGroup;
 			children = (
+				626E812B2542120400540CDF /* Extension.swift */,
 				6237FAE824D1D9EA00442276 /* AppDelegate.swift */,
 				6237FAEA24D1D9EA00442276 /* SceneDelegate.swift */,
+				622272B82508201D00CE5D6A /* UITextField+InputView.swift */,
 				6237FAFF24D1DA1A00442276 /* Model */,
 				6237FB0224D1DA4600442276 /* View */,
 				62B30EBD24D2452600C2CD4D /* Controller */,
 				6237FAF424D1D9F200442276 /* Assets.xcassets */,
 				6237FAF624D1D9F200442276 /* LaunchScreen.storyboard */,
 				6237FAF924D1D9F200442276 /* Info.plist */,
+				626E812725420DBE00540CDF /* GoogleService-Info.plist */,
 				6237FAF124D1D9EA00442276 /* BakeryHelper.xcdatamodeld */,
-				622B5CCC24D5F62C00614887 /* GoogleService-Info.plist */,
 			);
 			path = BakeryHelper;
 			sourceTree = "<group>";
@@ -116,11 +148,14 @@
 		6237FAFF24D1DA1A00442276 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6258CD3F253A8C270068EFCA /* IngType.swift */,
 				6237FB0324D1DA5600442276 /* Ingredient.swift */,
+				624AD0F4252D16F300772A2C /* Measurement.swift */,
 				6237FB0024D1DA3400442276 /* Product.swift */,
 				62CF190424F9AB46002718AA /* IngDisp.swift */,
 				622B5CCA24D5E73B00614887 /* Constants.swift */,
 				62B30EB924D243C400C2CD4D /* Order.swift */,
+				62CF190624F9D8AA002718AA /* FormModel.swift */,
 				62B30EBB24D244A400C2CD4D /* Report.swift */,
 			);
 			path = Model;
@@ -130,11 +165,16 @@
 			isa = PBXGroup;
 			children = (
 				6237FAEE24D1D9EA00442276 /* Main.storyboard */,
+				62AA0134251A862100F35C32 /* FoldingDemoCell.swift */,
+				627239F22506E56200C281AD /* ProductGrid.swift */,
 				62B30EC024D2476500C2CD4D /* ItemCell.swift */,
+				622272B62507FEB000CE5D6A /* OrderFormCell.swift */,
 				62B30EC224D25CB500C2CD4D /* FormCell.swift */,
 				622B5CD224DF160E00614887 /* ProductCell.swift */,
 				621271DC24E44BDF0095B4D9 /* ProdFormCell.swift */,
 				62B0FD3024EB227000A0F70D /* ProdDetailCell.swift */,
+				62DC653D2506DE060031FA6D /* OrderSelCell.swift */,
+				622272BA2512DABC00CE5D6A /* OrderCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -151,12 +191,17 @@
 		62B30EBD24D2452600C2CD4D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				626E81292542117600540CDF /* LoginViewController.swift */,
 				6237FAEC24D1D9EA00442276 /* MainViewController.swift */,
 				62B30EBE24D2459F00C2CD4D /* InventoryViewController.swift */,
 				62B30EC424D2637E00C2CD4D /* InvFormViewController.swift */,
 				622B5CD024DF137A00614887 /* ProductViewController.swift */,
 				62D96B8824E1FCD1008A9EBF /* ProdFormViewController.swift */,
 				62B0FD2E24EB224C00A0F70D /* ProdDetailViewController.swift */,
+				62DC653725055E740031FA6D /* OrderViewController.swift */,
+				62DC653925055E870031FA6D /* OrderFormViewController.swift */,
+				62DC653B25055EEB0031FA6D /* OrderProdSelectionViewController.swift */,
+				62AA0136251A8E1500F35C32 /* Order2ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -230,9 +275,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6237FAF824D1D9F200442276 /* LaunchScreen.storyboard in Resources */,
+				626E812825420DBE00540CDF /* GoogleService-Info.plist in Resources */,
 				6237FAF524D1D9F200442276 /* Assets.xcassets in Resources */,
 				6237FAF024D1D9EA00442276 /* Main.storyboard in Resources */,
-				622B5CCD24D5F62C00614887 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,16 +330,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62CF190724F9D8AA002718AA /* FormModel.swift in Sources */,
+				627239F32506E56200C281AD /* ProductGrid.swift in Sources */,
 				6237FAED24D1D9EA00442276 /* MainViewController.swift in Sources */,
 				62B30EC324D25CB500C2CD4D /* FormCell.swift in Sources */,
 				622B5CD124DF137A00614887 /* ProductViewController.swift in Sources */,
 				62B30EBF24D2459F00C2CD4D /* InventoryViewController.swift in Sources */,
+				622272BB2512DABC00CE5D6A /* OrderCell.swift in Sources */,
+				62DC653E2506DE060031FA6D /* OrderSelCell.swift in Sources */,
+				62DC653A25055E870031FA6D /* OrderFormViewController.swift in Sources */,
 				6237FAE924D1D9EA00442276 /* AppDelegate.swift in Sources */,
 				6237FB0424D1DA5600442276 /* Ingredient.swift in Sources */,
+				62AA0135251A862100F35C32 /* FoldingDemoCell.swift in Sources */,
 				62B30EC124D2476500C2CD4D /* ItemCell.swift in Sources */,
+				622272B92508201D00CE5D6A /* UITextField+InputView.swift in Sources */,
 				62B0FD3124EB227000A0F70D /* ProdDetailCell.swift in Sources */,
+				62DC653C25055EEB0031FA6D /* OrderProdSelectionViewController.swift in Sources */,
+				622272B72507FEB000CE5D6A /* OrderFormCell.swift in Sources */,
+				62DC653825055E740031FA6D /* OrderViewController.swift in Sources */,
+				624AD0F5252D16F300772A2C /* Measurement.swift in Sources */,
 				62B30EBC24D244A400C2CD4D /* Report.swift in Sources */,
+				62AA0137251A8E1500F35C32 /* Order2ViewController.swift in Sources */,
 				62CF190524F9AB46002718AA /* IngDisp.swift in Sources */,
+				6258CD40253A8C270068EFCA /* IngType.swift in Sources */,
 				62B30EC524D2637E00C2CD4D /* InvFormViewController.swift in Sources */,
 				6237FB0124D1DA3400442276 /* Product.swift in Sources */,
 				62B0FD2F24EB224C00A0F70D /* ProdDetailViewController.swift in Sources */,
@@ -302,6 +360,8 @@
 				622B5CCB24D5E73B00614887 /* Constants.swift in Sources */,
 				622B5CD324DF160E00614887 /* ProductCell.swift in Sources */,
 				621271DD24E44BDF0095B4D9 /* ProdFormCell.swift in Sources */,
+				626E812C2542120400540CDF /* Extension.swift in Sources */,
+				626E812A2542117600540CDF /* LoginViewController.swift in Sources */,
 				6237FAF324D1D9EA00442276 /* BakeryHelper.xcdatamodeld in Sources */,
 				62B30EBA24D243C400C2CD4D /* Order.swift in Sources */,
 				62D96B8924E1FCD1008A9EBF /* ProdFormViewController.swift in Sources */,
@@ -449,6 +509,7 @@
 			baseConfigurationReference = 3F3D4E23F6005E1F3E704EA8 /* Pods-BakeryHelper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6XMX5F8RR5;
 				INFOPLIST_FILE = BakeryHelper/Info.plist;
@@ -458,6 +519,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Liveit.BakeryHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -468,6 +530,7 @@
 			baseConfigurationReference = 7A9598C28A45DFA2E5510ACA /* Pods-BakeryHelper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6XMX5F8RR5;
 				INFOPLIST_FILE = BakeryHelper/Info.plist;
@@ -477,6 +540,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Liveit.BakeryHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

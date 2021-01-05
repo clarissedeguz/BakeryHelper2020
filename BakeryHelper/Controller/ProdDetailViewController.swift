@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import SwipeCellKit
 
 
 protocol ProductDetailDelegate: class {
@@ -16,40 +17,40 @@ protocol ProductDetailDelegate: class {
 }
 
 
-
-
 class ProdDetailViewController: UITableViewController {
     
     private var prodToDisp: [Product] = []
-    private var prodIngDict: [String:[String: Int]] = [:]
+    private var prodIngDict: [String:[String: Double]] = [:]
     private var prodIng: [IngDisp] = []
     weak var delegate: ProductDetailDelegate?
-    
+    var db: Firestore!
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProdDetail", for: indexPath) as! ProdDetailCell
         
         switch indexPath.section {
-            
         case 0:
-            cell.label.text = "PRODUCT NAME:"
-   
+            cell.label.text = "Product:"
             cell.amount.text = prodToDisp[indexPath.row].name
         case 1:
-            cell.label.text = "SERVING SIZE:"
+            cell.label.text = "Serving Size:"
             cell.amount.text = String(prodToDisp[indexPath.row].serving)
         case 2:
+            cell.label.text = "Price"
+            cell.amount.text = "$\(String(prodToDisp[indexPath.row].price))"
+        case 3:
             cell.label.text = prodIng[indexPath.row].name
             
-            if prodIng[indexPath.row].measurement == "N/A" {
+            switch prodIng[indexPath.row].measurement {
+            case "N/A":
                 cell.amount.text = (prodIng[indexPath.row].amount)
-            } else {
+            default:
                 cell.amount.text = ("\(prodIng[indexPath.row].amount) \(prodIng[indexPath.row].measurement)")
             }
             
         default:
-            print("another typa cell")
-        
+            let buttonCell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath)
+            return buttonCell
         }
         return cell
     }
@@ -58,83 +59,88 @@ class ProdDetailViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 2 {
-            
-            return prodIngDict.count
-            
+        if section == 3 {
+            return prodIng.count
         }
-    
         return 1
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-           return 3
-       }
-    
-   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        var header: String = ""
-        
-        switch section {
-        case 0: header = "NAME"
-        case 1: header = "SERVING"
-        case 2: header  = "INGREDIENTS"
-        default: return nil
-        }
-        
-        return header
+        return 5
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let title = ["Name", "Serving", "Price", "Ingredients", ""]
+        return title[section]
+    }
+    
+    
+    @IBAction func deleteRec(_ sender: UIButton) {
+        
+       let recToDelete = prodToDisp[0].name
+              db.collection(ProdForm.dbName).whereField("name", isEqualTo: recToDelete)
+                  .getDocuments() { (querySnapshot, err) in
+                      if let err = err {
+                          print("Error getting documents: \(err)")
+                      } else {
+                          for document in querySnapshot!.documents {
+                              self.db.collection(ProdForm.dbName).document(document.documentID).delete()
+                          }
+                        
+                        DispatchQueue.main.async {
+                            self.dismiss(animated: true)
+                        }
+                     
+                    }
+              }
+       
+        
+        
+        }
+    
     
     
     func getDisplayData() {
-        prodToDisp = delegate?.getData() as! [Product]
-        prodIngDict = prodToDisp[0].ingItems
-        
-        for (key, value) in prodIngDict {
+        if let data = delegate?.getData() as? [Product] {
+            prodToDisp = data
+            let wetIng = prodToDisp[0].wetIngItems
+            let dryIng = prodToDisp[0].dryIngItems
             
-            let name = key
-            var amount: String = ""
-            var measurement: String = ""
+            var combinedAttributes : NSMutableDictionary!
+
+            combinedAttributes = NSMutableDictionary(dictionary: wetIng)
+
+            combinedAttributes.addEntries(from: dryIng)
             
-            for (key, values) in value {
+            prodIngDict = combinedAttributes as! [String : [String : Double]]
             
-                amount = String(values)
-                measurement = key
-    
+            for (key, value) in prodIngDict {
+                let name = key
+                var amount: String = ""
+                var measurement: String = ""
+                
+                for (key, values) in value {
+                    amount = String(values)
+                    measurement = key
+                }
+                let newItem = IngDisp(name: name, amount: amount, measurement: measurement)
+                self.prodIng.append(newItem)
             }
-            
-            let newItem = IngDisp(name: name, amount: amount, measurement: measurement)
-            self.prodIng.append(newItem)
         }
-        
-    
-        print(prodIng.count)
-      
-        for key in prodIngDict.keys {
-            prodIngDict[key.uppercased()] = prodIngDict.removeValue(forKey: key)
-        }
-        
-        
-        
-        
-        print("2PRODVC getDisplDat() TO DISPLAY: \(prodToDisp[0].name)")
     }
-    
-    
-    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         getDisplayData()
-      
+        db = Firestore.firestore()
+        
         
         
     }
     
-   
-    
-    
-    
+
 }
+
+

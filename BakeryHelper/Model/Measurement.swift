@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+struct Measurement {
+    var value: Double
+    var measurement: UnitVolume
+
+}
+    
+    
+    
+    
+

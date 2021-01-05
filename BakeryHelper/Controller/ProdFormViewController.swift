@@ -9,103 +9,131 @@
 import Foundation
 import UIKit
 import Firebase
+import SwipeCellKit
 
 protocol ProductDelegate {
     
 }
 
+struct ingArrayName {
+    var name: String
+    var type: IngType
+}
+
 class ProdFormViewController: UITableViewController {
-    
+   
     var db: Firestore!
     var delegate: ProductDelegate?
+    var ingType: IngType?
+    var ingredientTypes: [IngType] = [.wetIngredient, .dryIngredient]
+    var ingTypeResult = ""
+    var resultString = ""
+    var wetIng: [Ingredient] = []
+    var dryIng: [Ingredient] = []
    
-    private var prodIngArray: [Ingredient] = []
-    private var ingArray = ["Milk", "Butter", "Sugar"]
-    private var prodIngDic: [String: [String: Int]] = [:]
-  
-    fileprivate var newIng: String = ""
-   
-    fileprivate var name: String = ""
-    fileprivate var serving: String = ""
-    fileprivate var amount: String = ""
-    fileprivate var measurement: String = ""
-
-   
+    fileprivate var formMod = FormModel()
+    
+    private var ingArray: [ingArrayName] = [ingArrayName(name: "Milk", type: .wetIngredient), ingArrayName(name: "Butter", type: .wetIngredient),ingArrayName(name: "Sugar", type: .dryIngredient)]
+    
+    let headerTitle: [String] = ["Name", "Serving", "Price","Ingredients", ""]
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProdFormCell", for: indexPath) as! ProdFormCell
-        cell.setup(delegate: self)
+        cell.setup(delegate: self, pickerDelegate: self, pickerDataSource: self)
+        cell.delegate = self
+        cell.textFieldDelegate = self
+        cell.prodForm.font = UIFont(name: "AvenirNextCondensed-Bold", size: 20)
+        cell.prodForm.textColor = UIColor(hexString: "80BB93", withAlpha: 1.0)
+        
+        cell.prodForm.text = headerTitle[indexPath.section]
+       tableView.tableHeaderView?.frame = CGRect.zero
+        
+        cell.prodType.isHidden = true
+        cell.prodMeas.isHidden = true
+        
+        
         
         switch indexPath.section {
-        case 0 : cell.prodForm.text! = "Name"
-        cell.prodTextField.tag = 10
-        cell.prodMeas.isHidden = true
-        case 1 : cell.prodForm.text! = "Serving"
-        cell.prodTextField.tag = 20
-        cell.prodMeas.isHidden = true
+        case 0 :
+            cell.prodTextField.tag = indexPath.section
+        case 1 :
+            cell.prodTextField.tag = indexPath.section
         case 2:
-            cell.prodForm.text! = ingArray[indexPath.row]
+            cell.prodTextField.placeholder = "$0.00"
+            cell.prodTextField.tag = indexPath.section
+        case 3:
+            cell.prodForm.text! = ingArray[indexPath.row].name
+            cell.prodForm.font = UIFont(name: "AvenirNextCondensed", size: 20)
+            cell.prodForm.textColor = .flatBlack()
+            cell.prodMeas.isHidden = false
+            cell.thePicker.tag = indexPath.row
             cell.prodTextField.tag = indexPath.row + 30
             cell.prodMeas.tag = indexPath.row + 40
-        case 3:
+  
+        case 4:
             let buttonCell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath)
             return buttonCell
         default:
             print("We gucci")
         }
-        
-        
         return cell
     }
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var numOfRow: Int
-        
         switch section {
-        case 0: numOfRow = 1
-        case 1: numOfRow = 1
-        case 2: numOfRow = ingArray.count
-        default: numOfRow = 1
+        case 3:
+            return ingArray.count
+        default:
+            return 1
         }
-        
-        return numOfRow
     }
     
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        var header: String = ""
-        
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let frame = tableView.frame
+
         switch section {
-        case 0: header = "NAME"
-        case 1: header = "SERVING"
-        case 2: header  = "INGREDIENTS"
-        default: return nil
+        case 3:
+            let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
+            headerView.backgroundColor = .none
+            let label = UILabel(frame: CGRect(x: 15, y: 25, width: 150, height: 25))
+            label.text = headerTitle[section]
+            label.font = UIFont(name: "AvenirNextCondensed-Bold", size: 20)
+            label.textColor = UIColor(hexString: "80BB93", withAlpha: 1.0)
+            
+            
+            headerView.addSubview(label)
+            return headerView
+        
+        default:
+            let headerView: UIView = UIView(frame: CGRect.zero)
+            return headerView
         }
-        return header
+        
     }
+    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 100
+        tableView.rowHeight = 80
         tableView.showsVerticalScrollIndicator = true
+        
         db = Firestore.firestore()
         
     }
     
     @IBAction func addIng(_ sender: UIButton) {
         var ingTF = UITextField()
-        
-                
         let ingAlert = UIAlertController(title:  "New Ingredient", message: "", preferredStyle: .alert)
         
         ingAlert.addTextField { (ingTextField) in
@@ -116,74 +144,139 @@ class ProdFormViewController: UITableViewController {
         }
        
         
-        let action = UIAlertAction(title: "Add", style: .default) { (action) in
-            self.newIng = ingTF.text!
-            self.ingArray.append(self.newIng)
+        let dryIng = UIAlertAction(title: "Dry", style: .default) { (action) in
+            let newIng = ingTF.text!
+            let newItem = ingArrayName(name: newIng, type: .dryIngredient)
+            self.ingArray.append(newItem)
             
             DispatchQueue.main.async {
                 self.tableView.beginUpdates()
-                self.tableView.insertRows(at: [IndexPath(row: self.ingArray.count - 1, section: 2)], with: .automatic)
+                self.tableView.insertRows(at: [IndexPath(row: self.ingArray.count - 1, section: 3)], with: .automatic)
                 self.tableView.endUpdates()
             }
             
         }
         
-       ingAlert.addAction(action)
+        let wetIng = UIAlertAction(title:  "Wet" , style: .default) { (action) in
+                  let newIng = ingTF.text!
+                  let newItem = ingArrayName(name: newIng, type: .wetIngredient)
+                  self.ingArray.append(newItem)
+            
+                  DispatchQueue.main.async {
+                      self.tableView.beginUpdates()
+                      self.tableView.insertRows(at: [IndexPath(row: self.ingArray.count - 1, section: 3)], with: .automatic)
+                      self.tableView.endUpdates()
+                  }
+                  
+              }
+         
+        ingAlert.addAction(wetIng)
+        ingAlert.addAction(dryIng)
         present(ingAlert, animated: true, completion: nil)
        
     }
+    @IBAction func back(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
+    var wetIngDic:[String: [String:Double]] = [:]
+    var dryIngDic:[String: [String:Double]] = [:]
     
     @IBAction func save(_ sender: UIBarButtonItem) {
         
-        var ingName = ""
-        var ingAmount = 0
-        var ingMeas = ""
+        savingData()
         
-        for ingredient in prodIngArray {
+        var ingName = ""
+        var ingAmount: Double
+        var ingMeas = ""
+       
+        let price = Float(formMod.price)
+        
+        for ingredient in wetIng {
             ingName = ingredient.name
             ingAmount = ingredient.amount
             ingMeas = ingredient.measurement ?? ""
             
-            prodIngDic[ingName] = [ingMeas: ingAmount]
+          let dict = [ingMeas: ingAmount]
+           wetIngDic[ingName] = dict
+        }
+      
+        for ingredient in dryIng {
+            ingName = ingredient.name
+            ingAmount = ingredient.amount
+            ingMeas = ingredient.measurement ?? ""
+            
+            let dict = [ingMeas: ingAmount]
+            dryIngDic[ingName] = dict
         }
         
-        print("SAVE: \(prodIngDic)")
-        
-        addIngredient(name: name, serving: Int(serving) ?? 0, ingName: "test", ingAmnt: prodIngDic)
-        
-//        dismiss(animated: true)
-        
-        
+        addIngredient(price: price ?? 0)
+
+        dismiss(animated: true)
     }
        
-    
-    
-    
-    func addIngredient(name: String, serving: Int, ingName: String, ingAmnt: [String: [String: Int]]) {
-    
+    func addIngredient(price: Float) {
         let dataToSave: [String: Any] = [
-            "name": name,
-            "serving": serving,
-            "ingredients": [ingAmnt]
-            ]
-        
+            "name": formMod.name,
+            "serving": formMod.serving,
+            "price": price,
+            "wet ingredients": [wetIngDic],
+            "dry ingredients": [dryIngDic]
+        ]
         db.collection(ProdForm.dbName).addDocument(data: dataToSave) { (error) in
             if error != nil {
                 print("Issue saving data to FireStore")
             } else {
                 print("Successfully saved")
-                print(dataToSave)
+            }
+        }
+    }
+    
+    func savingData() {
+        
+        for key in formMod.prodIngArray {
+            if key.type == IngType.wetIngredient.rawValue {
+                wetIng.append(key)
+            } else {
+                dryIng.append(key)
             }
         }
         
-        
-        
-    }
-        
     }
     
     
     
+    
+    
+}
+//MARK: - UIPickerView Delegate
+
+extension ProdFormViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        ingType = ingArray[pickerView.tag].type
+        return ingType?.content.count ?? 0
+    }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        pickerLabel.textColor = .systemBlue
+        pickerLabel.font = UIFont(name: "System", size: 30) // In this use your custom font
+        
+        pickerLabel.text = ingType?.content[row] ?? ""
+        
+        pickerLabel.textAlignment = NSTextAlignment.center
+        return pickerLabel
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        resultString = ingType?.content[row] ?? ""
+        
+    }
+}
+
+
 
 
 
@@ -194,121 +287,57 @@ extension ProdFormViewController: ProdTextFieldDelegate {
     
     func textFieldShouldEndEditing(text: String, textFieldTag: Int) {
         switch textFieldTag {
-        case 10:
-            name = text
-        case 20:
-            serving = text
+        case 0:
+            formMod.name = text
+        case 1:
+            formMod.serving = text
+        case 2:
+            formMod.price = text
         case 30...39:
-            amount = text
+            formMod.amount = text
         case 40...49:
-            measurement = text
+            formMod.measurement = text
+            
+            if formMod.measurement.isEmpty {
+                formMod.measurement = "N/A"
+            }
             
             let index = textFieldTag-40
             
-            let newIngredient = Ingredient(name: ingArray[index], amount: Int(amount) ?? 0, measurement: measurement, minimum: 0)
-            self.prodIngArray.append(newIngredient)
-
+            let newIngredient = Ingredient(name: ingArray[index].name, type: ingArray[index].type.rawValue, amount: Double(formMod.amount) ?? 0, measurement: formMod.measurement, minimum: 0)
+            self.formMod.prodIngArray.append(newIngredient)
+            
         default:
-        print("hi")
-            
-            
-            
-            
-            
-            
+            print("hi")
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        switch celltag {
-//        case 10:
-//            print(name)
-//            name = text
-//        case 20:
-//            serving = text
-//        case 0:
-//            if textFieldTag == 30 {
-//                mAmount = text
-//            } else if textFieldTag == 40 {
-//                mMeasurement = text
-//            }
-//            if !mAmount.isEmpty && !mMeasurement.isEmpty {
-//                let milk = Ingredient(name: "Milk", amount: Int(mAmount) ?? 0, measurement: mMeasurement, minimum: 0)
-//                self.prodIngArray.append(milk)
-//            }
-//        case 1:
-//            if textFieldTag == 31 {
-//                bAmount = text
-//            } else if textFieldTag == 41  {
-//                bMeasurement = text
-//            }
-//            if !bAmount.isEmpty && !bMeasurement.isEmpty {
-//                let butter = Ingredient(name: "Butter", amount: Int(bAmount) ?? 0, measurement: bMeasurement, minimum: 0)
-//                self.prodIngArray.append(butter)
-//            }
-//        case 2:
-//            if textFieldTag == 32 {
-//                sAmount = text
-//
-//            } else if textFieldTag == 42 {
-//                sMeasurement = text
-//
-//            }
-//            if !sAmount.isEmpty && !sMeasurement.isEmpty {
-//                let sugar = Ingredient(name: "Sugar", amount: Int(sAmount) ?? 0, measurement: sMeasurement, minimum: 0)
-//                self.prodIngArray.append(sugar)
-//            }
-//        default:
-//
-//            if textFieldTag == celltag + 30 {
-//                amount = ""
-//                amount = text
-//                print("TFShouldEndEditing() Amount: \(amount), \(newIng) TF\(textFieldTag)")
-//            }
-//            if textFieldTag == celltag + 40 {
-//                measurement = ""
-//                measurement = text
-//                print("TFShouldEndEditing() Measurement: \(measurement), \(newIng) TF\(textFieldTag)")
-//
-//                print(amount, newIng, measurement)
-//
-//                if measurement.isEmpty {
-//                    measurement = "N/A"
-//                }
-//
-//                let newIngredient = Ingredient(name: newIng, amount: Int(amount) ?? 0, measurement: measurement, minimum: 0)
-//                self.prodIngArray.append(newIngredient)
-//
-//
-//            }
-//
-//        }
-//
-//
-//    }
+    }
     
+    func pickerViewTF(textField: UITextField) {
+        textField.text = resultString
+    }
 }
+//MARK: - SwipeTableViewCell Delegate
+
+extension ProdFormViewController: SwipeTableViewCellDelegate {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+            
+            self.ingArray.remove(at: indexPath.row)
+            self.formMod.prodIngArray.remove(at: indexPath.row)
+            
+            DispatchQueue.main.async {
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.tableView.endUpdates()
+            }
+        }
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete")
+        return [deleteAction]
+    }
 }
+

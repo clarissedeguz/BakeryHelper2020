@@ -6,4 +6,10 @@
 //  Copyright © 2020 Claire De Guzman. All rights reserved.
 //
 
-import Foundation
+import UIKit
+struct Page {
+    var imageName: String
+    var title: String
+    var message: String
+    var backgroundColor: UIColor
+}

@@ -45,6 +45,7 @@ class ProductCell: UICollectionViewCell {
         didSet {
             if isSelected { // Selected cell
                 self.backgroundColor = .red
+                
             }
            }
         }

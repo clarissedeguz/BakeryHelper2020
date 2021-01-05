@@ -8,9 +8,11 @@ target 'BakeryHelper' do
   # Pods for BakeryHelper
 
 pod 'Firebase/Firestore'
+pod 'Firebase/Auth'
 pod 'FirebaseFirestoreSwift'
 pod 'SwipeCellKit'
 pod 'ChameleonFramework/Swift', :git => 'https://github.com/wowansm/Chameleon.git', :branch => 'swift5'
-
+pod 'FoldingCell'
+pod 'MiseEnPlace'
 
 end

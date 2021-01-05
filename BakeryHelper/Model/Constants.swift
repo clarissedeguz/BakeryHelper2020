@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 
-
 struct InvForm {
     static let dbName = "ingredients"
     static let ingName = "name"
@@ -22,5 +21,8 @@ struct ProdForm {
     static let dbName = "products"
     static let ingName = "name"
     static let ingServing = "serving"
+}
 
+struct OrderForm {
+    static let dbName = "orders"
 }

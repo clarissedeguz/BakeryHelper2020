@@ -13,12 +13,14 @@ class Order {
     var deadline = Date()
     var isDelivered: Bool = false
     var order: [Product]
+    var price: Float
     
-    init(name: String, due: Date, status: Bool, order: [Product]) {
+    init(name: String, due: Date, price: Float, status: Bool, order: [Product]) {
         self.name = name
         deadline = due
         isDelivered = status
         self.order = order
+        self.price = price
     }
 
 

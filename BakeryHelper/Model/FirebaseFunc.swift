@@ -8,16 +8,13 @@
 
 import Foundation
 import Firebase
+import UIKit
 
 
-class Firebase {
-    var db: Firestore!
-    var docRef: DocumentReference!
+struct FirebaseFunc {
+    var db = Firestore.firestore()
+    var docRef: DocumentReference 
 
-    func viewDidLoad() {
-        db = Firestore.firestore()
-    }
-    
     func getIngredients(database: String, cv: UICollectionView) -> [String] {
            // [START get_document]
            print("PRODVC getIngredients(): loading cell name via FB")

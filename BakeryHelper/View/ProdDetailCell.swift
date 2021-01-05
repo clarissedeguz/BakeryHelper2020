@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import SwipeCellKit
 
-class ProdDetailCell: UITableViewCell {
+class ProdDetailCell: SwipeTableViewCell {
     
     @IBOutlet weak var label: UILabel!
     

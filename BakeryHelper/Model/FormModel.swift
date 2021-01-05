@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+ struct FormModel {
+    var name: String = ""
+    var amount: String = ""
+    var type: String = ""
+    var measurement: String = ""
+    var notif: String = ""
+    var serving: String = ""
+    var date: String = ""
+    var price: String = ""
+    var prodIngArray: [Ingredient] = []
+}
